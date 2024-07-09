@@ -13,13 +13,12 @@ public class User {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "nome", length = 40, nullable = false)
-    private String nome;
+    @Column(name = "name", length = 40, nullable = false)
+    private String name;
 
     @Column(name = "password", length = 40, nullable = false)
     private String password;
 
-    @Column(name = "tipo", length = 1, nullable = false)
-    private String tipo;
-    ;
+    @Column(name = "user_type", length = 1, nullable = false)
+    private String userType;
 }
