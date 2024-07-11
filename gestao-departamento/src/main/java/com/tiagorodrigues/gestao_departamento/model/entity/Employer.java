@@ -1,5 +1,6 @@
 package com.tiagorodrigues.gestao_departamento.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -24,10 +25,12 @@ public class Employer {
     @Column(name = "household", nullable = false, columnDefinition = "TEXT")
     private String household;
 
+    @JsonProperty("date_of_birth")
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
+    @JsonProperty("id_departament")
     @ManyToOne
     @JoinColumn(name = "id_departament", nullable = false)
     private Departament departmentId;
