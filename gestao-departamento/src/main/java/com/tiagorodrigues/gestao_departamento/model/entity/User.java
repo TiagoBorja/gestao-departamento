@@ -1,5 +1,6 @@
 package com.tiagorodrigues.gestao_departamento.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class User {
     @Column(name = "password", length = 40, nullable = false)
     private String password;
 
+    @JsonProperty("user_type")
     @Column(name = "user_type", length = 1, nullable = false)
     private String userType;
 
