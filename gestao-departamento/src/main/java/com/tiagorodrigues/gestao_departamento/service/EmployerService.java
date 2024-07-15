@@ -36,10 +36,14 @@ public class EmployerService {
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
         employer.setDepartmentId(department);
+
+        if (employerRepository.findByMail(employer.getMail()).isPresent()) {
+            throw new RuntimeException("There is already an employer with this email.");
+        }
         return employerRepository.save(employer);
     }
 
-    public Employer updateEmployer(Long departamentId,Long id, Employer employerDetails) {
+    public Employer updateEmployer(Long departamentId, Long id, Employer employerDetails) {
         Optional<Employer> employerOptional = employerRepository.findById(id);
         Departament department = departamentRepository.findById(departamentId)
                 .orElseThrow(() -> new RuntimeException("Department not found"));
