@@ -1,8 +1,8 @@
 package com.tiagorodrigues.gestao_departamento.service;
 
-import com.tiagorodrigues.gestao_departamento.model.entity.Departament;
+import com.tiagorodrigues.gestao_departamento.model.entity.Department;
 import com.tiagorodrigues.gestao_departamento.model.entity.Employer;
-import com.tiagorodrigues.gestao_departamento.repository.DepartamentRepository;
+import com.tiagorodrigues.gestao_departamento.repository.DepartmentRepository;
 import com.tiagorodrigues.gestao_departamento.repository.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class EmployerService {
     EmployerRepository employerRepository;
 
     @Autowired
-    DepartamentRepository departamentRepository;
+    DepartmentRepository departamentRepository;
 
     public List<Employer> getAllEmployers(Employer employer) {
         return employerRepository.findAll();
@@ -32,7 +32,7 @@ public class EmployerService {
     }
 
     public Employer createEmployer(Long departmentId, Employer employer) {
-        Departament department = departamentRepository.findById(departmentId)
+        Department department = departamentRepository.findById(departmentId)
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
         employer.setDepartmentId(department);
@@ -45,7 +45,7 @@ public class EmployerService {
 
     public Employer updateEmployer(Long departamentId, Long id, Employer employerDetails) {
         Optional<Employer> employerOptional = employerRepository.findById(id);
-        Departament department = departamentRepository.findById(departamentId)
+        Department department = departamentRepository.findById(departamentId)
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
         if (employerOptional.isPresent()) {

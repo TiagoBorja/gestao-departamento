@@ -3,10 +3,10 @@ package com.tiagorodrigues.gestao_departamento.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = Departament.TABLE_NAME)
-public class Departament {
+@Table(name = Department.TABLE_NAME)
+public class Department {
 
-    public static final String TABLE_NAME = "departaments";
+    public static final String TABLE_NAME = "departments";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

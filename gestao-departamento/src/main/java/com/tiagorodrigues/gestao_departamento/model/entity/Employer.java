@@ -30,10 +30,10 @@ public class Employer {
     @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
-    @JsonProperty("id_departament")
+    @JsonProperty("id_department")
     @ManyToOne
-    @JoinColumn(name = "id_departament", nullable = false)
-    private Departament departmentId;
+    @JoinColumn(name = "id_department", nullable = false)
+    private Department departmentId;
 
     public Long getId() {
         return id;
@@ -75,11 +75,11 @@ public class Employer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Departament getDepartmentId() {
+    public Department getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Departament departmentId) {
+    public void setDepartmentId(Department departmentId) {
         this.departmentId = departmentId;
     }
 }

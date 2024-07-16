@@ -25,14 +25,14 @@ public class EmployerController {
         return ResponseEntity.ok(employerService.getEmployerById(id));
     }
 
-    @PostMapping("departament/{departamentId}")
-    public ResponseEntity<Employer> createEmployer(@PathVariable Long departamentId, @RequestBody Employer employer) {
-        return ResponseEntity.ok(employerService.createEmployer(departamentId,employer));
+    @PostMapping("department/{departmentId}")
+    public ResponseEntity<Employer> createEmployer(@PathVariable Long departmentId, @RequestBody Employer employer) {
+        return ResponseEntity.ok(employerService.createEmployer(departmentId,employer));
     }
 
-    @PutMapping("{id}/departament/{departamentId}")
-    public ResponseEntity<Employer> updateEmployer(@PathVariable Long departamentId,@PathVariable Long id, @RequestBody Employer employer){
-        return ResponseEntity.ok(employerService.updateEmployer(departamentId,id,employer));
+    @PutMapping("{id}/department/{departmentId}")
+    public ResponseEntity<Employer> updateEmployer(@PathVariable Long departmentId,@PathVariable Long id, @RequestBody Employer employer){
+        return ResponseEntity.ok(employerService.updateEmployer(departmentId,id,employer));
     }
 
     @DeleteMapping("{id}")
