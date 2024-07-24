@@ -1,30 +1,32 @@
 const API_URL = "http://localhost:8080";
 let departmentId = 0;
-
 //#region Modals Config
 
 //Modal Config - Create Employer
 $("#newEmployerButton").on("click", function () {
   $("#saveEmployerModal").modal("show");
-
-  $("#employerSaveForm").on("submit", function (e) {
-    e.preventDefault();
-
-    departmentId = $("#departmentId").val();
-
-    const employer = {
-      name: $("#employerName").val(),
-      mail: $("#employerMail").val(),
-      household: $("#employerHousehold").val(),
-      date_of_birth: $("#employerBirth").val(),
-      id_department: { id: departmentId },
-    };
-
-    createEmployer(employer);
-    $("#saveEmployerModal").modal("hide");
-  });
 });
 
+$("#employerSaveForm").on("submit", function (e) {
+  e.preventDefault();
+
+  departmentId = $("#departmentId").val();
+
+  const employer = {
+    name: $("#employerName").val(),
+    mail: $("#employerMail").val(),
+    household: $("#employerHousehold").val(),
+    date_of_birth: $("#employerBirth").val(),
+    id_department: { id: departmentId },
+  };
+
+  createEmployer(employer);
+  $("#saveEmployerModal").modal("hide");
+});
+
+$("#employerTableBody").on("click", "#viewEmployerButton", function () {
+  fillModalById($(this).data("id"));
+});
 //#endregion
 
 //#region API Functions
@@ -65,6 +67,10 @@ function showEmployers(employers) {
   let table = "";
 
   employers.forEach((employer) => {
+    if (employer == null)
+      table += `<tr> 
+                <td scope="row">Employers not found.</td>
+                </tr>`;
     table += `<tr>
                 <td scope="row">${employer.id}</td>
                 <td>${employer.name}</td>
@@ -110,10 +116,31 @@ function fillSelectDepartment() {
   });
 }
 
+function fillModalById(id) {
+  $.ajax({
+    type: "GET",
+    url: `${API_URL}/employers/${id}`,
+    success: function (employer) {
+      $("#viewEmployerId").val(employer.id);
+      $("#viewEmployerName").val(employer.name);
+      $("#viewEmployerMail").val(employer.mail);
+      $("#viewEmployerHousehold").val(employer.household);
+      $("#viewEmployerBirth").val(employer.date_of_birth);
+      $("#viewEmployerDepartment").val(employer.id_department["name"]);
+
+      $("#viewEmployermodal").modal("show");
+
+      console.log(employer);
+    },
+    error: function (xhr, status, error) {
+      console.error("HTTP-Error: " + xhr.status, error);
+    },
+  });
+}
+
 //#endregion
 
 //#region Document Ready
-
 $(document).ready(function () {
   getEmployers();
   fillSelectDepartment();
