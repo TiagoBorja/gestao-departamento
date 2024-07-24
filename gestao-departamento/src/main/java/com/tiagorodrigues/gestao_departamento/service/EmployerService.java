@@ -37,19 +37,33 @@ public class EmployerService {
 
         employer.setDepartmentId(department);
 
-        if (employerRepository.findByMail(employer.getMail()).isPresent()) {
+        if (employerRepository.countByMailAndIdNot(employer.getMail(), employer.getId()) > 0) {
             throw new RuntimeException("There is already an employer with this email.");
         }
         return employerRepository.save(employer);
     }
 
-    public Employer updateEmployer(Long departamentId, Long id, Employer employerDetails) {
+    public Employer updateEmployer(
+            Long departmentId,
+            Long id,
+            Employer employerDetails) {
+
         Optional<Employer> employerOptional = employerRepository.findById(id);
-        Department department = departamentRepository.findById(departamentId)
+        Department department = departamentRepository.findById(departmentId)
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
+
         if (employerOptional.isPresent()) {
+
             Employer employer = employerOptional.get();
+
+            if (!employer.getMail().equals(employerDetails.getMail())) {
+                if (employerRepository.countByMailAndIdNot(employerDetails.getMail(), employerDetails.getId()) > 0) {
+                    throw new RuntimeException("E-mail already in use!");
+                }
+            }
+
+
             employer.setName(employerDetails.getName());
             employer.setDateOfBirth(employerDetails.getDateOfBirth());
             employer.setMail(employerDetails.getMail());
