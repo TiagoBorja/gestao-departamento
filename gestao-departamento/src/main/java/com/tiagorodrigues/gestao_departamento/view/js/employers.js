@@ -1,61 +1,6 @@
 const API_URL = "http://localhost:8080";
 let departmentId = 0;
 let employerId = 0;
-//#region Modals Config
-
-//Modal Config - saveEmployerModal
-$("#newEmployerButton").on("click", function () {
-  $("#saveEmployerModal").modal("show");
-});
-
-$("#employerEditForm").on("submit", function (e) {
-  e.preventDefault();
-
-  employerId = $("#editEmployerId").val();
-  departmentId = $("#editDepartmentId").val();
-
-  const employer = {
-    id: employerId,
-    name: $("#editEmployerName").val(),
-    mail: $("#editEmployerMail").val(),
-    household: $("#editEmployerHousehold").val(),
-    date_of_birth: $("#editEmployerBirth").val(),
-    id_department: { id: departmentId },
-  };
-
-  updateEmployer(employer);
-  $("#editEmployerModal").modal("hide"); // Use the correct ID here
-});
-
-//Modal Config - viewEmployerModal
-$("#employerTableBody").on("click", "#viewEmployerButton", function () {
-  fillModalById($(this).data("id"), "viewEmployer");
-});
-
-//Modal Config - editEmployerModal
-$("#employerTableBody").on("click", "#editEmployerButton", function () {
-  fillModalById($(this).data("id"), "editEmployer");
-});
-
-$("#employerEditForm").on("submit", function (e) {
-  e.preventDefault();
-
-  employerId = $("#editEmployerId").val();
-  departmentId = $("#editDepartmentId").val();
-
-  const employer = {
-    id: employerId,
-    name: $("#editEmployerName").val(),
-    mail: $("#editEmployerMail").val(),
-    household: $("#editEmployerHousehold").val(),
-    date_of_birth: $("#editEmployerBirth").val(),
-    id_department: { id: departmentId },
-  };
-
-  updateEmployer(employer);
-  $("#editEmployerModal").modal("hide");
-});
-//#endregion
 
 //#region API Functions
 
@@ -91,6 +36,21 @@ function updateEmployer(employer) {
   $.ajax({
     type: "PUT",
     url: `${API_URL}/employers/${employerId}/department/${departmentId}`,
+    contentType: "application/json",
+    data: JSON.stringify(employer),
+    success: function () {
+      getEmployers();
+    },
+    error: function (xhr, status, error) {
+      console.error("HTTP-Error: " + xhr.status, error);
+    },
+  });
+}
+
+function deleteEmployer(employer) {
+  $.ajax({
+    type: "DELETE",
+    url: `${API_URL}/employers/${employerId}`,
     contentType: "application/json",
     data: JSON.stringify(employer),
     success: function () {
@@ -188,6 +148,78 @@ function fillModalById(id, modalPrefix) {
 $(document).ready(function () {
   getEmployers();
   fillSelectDepartment();
+
+  //#region Modals Config
+
+  //Modal Config - saveEmployerModal
+  $("#newEmployerButton").on("click", function () {
+    $("#saveEmployerModal").modal("show");
+  });
+
+  $("#employerSaveForm").on("submit", function (e) {
+    e.preventDefault();
+
+    departmentId = $("#departmentId").val();
+
+    const employer = {
+      name: $("#employerName").val(),
+      mail: $("#employerMail").val(),
+      household: $("#employerHousehold").val(),
+      date_of_birth: $("#employerBirth").val(),
+      id_department: { id: departmentId },
+    };
+
+    createEmployer(employer);
+    $("#saveEmployerModal").modal("hide"); // Use the correct ID here
+  });
+
+  //Modal Config - viewEmployerModal
+  $("#employerTableBody").on("click", "#viewEmployerButton", function () {
+    fillModalById($(this).data("id"), "viewEmployer");
+  });
+
+  //Modal Config - editEmployerModal
+  $("#employerTableBody").on("click", "#editEmployerButton", function () {
+    fillModalById($(this).data("id"), "editEmployer");
+  });
+
+  $("#employerEditForm").on("submit", function (e) {
+    e.preventDefault();
+
+    employerId = $("#editEmployerId").val();
+    departmentId = $("#editDepartmentId").val();
+
+    const employer = {
+      id: employerId,
+      name: $("#editEmployerName").val(),
+      mail: $("#editEmployerMail").val(),
+      household: $("#editEmployerHousehold").val(),
+      date_of_birth: $("#editEmployerBirth").val(),
+      id_department: { id: departmentId },
+    };
+
+    updateEmployer(employer);
+    $("#editEmployerModal").modal("hide");
+  });
+
+  //Modal Config - deleteEmployerModal
+  $("#employerTableBody").on("click", "#deleteEmployerButton", function () {
+    fillModalById($(this).data("id"), "deleteEmployer");
+  });
+
+  $("#employerDeleteForm").on("submit", function (e) {
+    e.preventDefault();
+
+    employerId = $("#deleteEmployerId").val();
+
+    const employer = {
+      id: employerId,
+    };
+
+    deleteEmployer(employer);
+    $("#deleteEmployerModal").modal("hide");
+  });
+  //#endregion
 });
 
 //#endregion
