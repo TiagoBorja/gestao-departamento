@@ -53,12 +53,28 @@ function showDepartments(departments) {
 
   $("#departmentTableBody").html(table);
 }
+
+function fillModalById(id, modalPrefix) {
+  $.ajax({
+    type: "GET",
+    url: `${API_URL}/departments/${id}`,
+    success: function (department) {
+      $(`#${modalPrefix}Id`).val(department.id);
+      $(`#${modalPrefix}Name`).val(department.name);
+
+      $(`#${modalPrefix}Modal`).modal("show");
+    },
+    error: function (xhr, status, error) {
+      console.error("HTTP-Error: " + xhr.status, error);
+    },
+  });
+}
 //#endregion
 
 $(document).ready(function () {
   getDepartments();
 
-  //#region Modals Config
+  //#region Create Modal Config
   $("#newDepartmentButton").on("click", function () {
     $("#saveDepartmentModal").modal("show");
   });
@@ -73,6 +89,12 @@ $(document).ready(function () {
     createDepartment(department);
     $("#saveDepartmentModal").find("form")[0].reset();
     $("#saveDepartmentModal").modal("hide");
+  });
+  //#endregion
+
+  //#region View Modal Config
+  $("#departmentTableBody").on("click", "#viewDepartmentButton", function () {
+    fillModalById($(this).data("id"), "viewDepartment");
   });
   //#endregion
 });

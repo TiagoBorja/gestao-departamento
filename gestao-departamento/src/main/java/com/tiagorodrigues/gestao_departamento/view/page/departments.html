@@ -20,7 +20,7 @@
   <body class="bg-secondary">
     <div id="navbar"></div>
 
-    <!-- Employer Create Modal -->
+    <!-- Department Create Modal -->
     <div class="modal fade" id="saveDepartmentModal">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -136,12 +136,12 @@
       </div>
     </div>
 
-    <!-- Employer View Modal -->
-    <div class="modal fade" id="viewEmployerModal">
+    <!-- Department View Modal -->
+    <div class="modal fade" id="viewDepartmentModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Employer Details</h5>
+            <h5 class="modal-title">Department Details</h5>
             <button
               type="button"
               class="btn-close"
@@ -150,60 +150,14 @@
             ></button>
           </div>
           <div class="modal-body">
-            <input type="hidden" id="viewEmployerId" />
+            <input type="hidden" id="viewDepartmentId" />
 
             <div class="mb-3">
-              <label for="viewEmployerName" class="form-label">Name</label>
+              <label for="viewDepartmentName" class="form-label">Name</label>
               <input
                 type="text"
                 class="form-control"
-                id="viewEmployerName"
-                readonly
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="viewEmployerMail" class="form-label">E-mail</label>
-              <input
-                type="email"
-                class="form-control"
-                id="viewEmployerMail"
-                readonly
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="viewEmployerHousehold" class="form-label"
-                >Household</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="viewEmployerHousehold"
-                readonly
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="viewEmployerBirth" class="form-label"
-                >Date of Birth</label
-              >
-              <input
-                type="date"
-                class="form-control"
-                id="viewEmployerBirth"
-                readonly
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="viewEmployerDepartment" class="form-label"
-                >Department</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="viewEmployerDepartment"
+                id="viewDepartmentName"
                 readonly
               />
             </div>
@@ -317,7 +271,7 @@
           <div class="card">
             <div class="card-header">
               <h4>
-                Employer
+                Department
                 <button
                   id="newDepartmentButton"
                   class="btn btn-success float-end"
