@@ -170,7 +170,8 @@ $(document).ready(function () {
     };
 
     createEmployer(employer);
-    $("#saveEmployerModal").modal("hide"); // Use the correct ID here
+    $("#saveEmployerModal").find("form")[0].reset();
+    $("#saveEmployerModal").modal("hide");
   });
 
   //Modal Config - viewEmployerModal
