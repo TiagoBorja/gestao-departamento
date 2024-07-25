@@ -1,5 +1,4 @@
 const API_URL = "http://localhost:8080";
-
 //#region API Config
 function getDepartments() {
   $.ajax({
@@ -20,6 +19,34 @@ function createDepartment(department) {
     url: `${API_URL}/departments`,
     contentType: "application/json",
     data: JSON.stringify(department),
+    success: function () {
+      getDepartments();
+    },
+    error: function (xhr, status, error) {
+      console.error("HTTP-Error: " + xhr.status, error);
+    },
+  });
+}
+
+function updateDepartment(department) {
+  $.ajax({
+    type: "PUT",
+    url: `${API_URL}/departments/${department.id}`,
+    contentType: "application/json",
+    data: JSON.stringify(department),
+    success: function () {
+      getDepartments();
+    },
+    error: function (xhr, status, error) {
+      console.error("HTTP-Error: " + xhr.status, error);
+    },
+  });
+}
+
+function deleteDepartment(department) {
+  $.ajax({
+    type: "DELETE",
+    url: `${API_URL}/departments/${department.id}`,
     success: function () {
       getDepartments();
     },
@@ -95,6 +122,41 @@ $(document).ready(function () {
   //#region View Modal Config
   $("#departmentTableBody").on("click", "#viewDepartmentButton", function () {
     fillModalById($(this).data("id"), "viewDepartment");
+  });
+  //#endregion
+
+  //#region Edit Modal Config
+  $("#departmentTableBody").on("click", "#editDepartmentButton", function () {
+    fillModalById($(this).data("id"), "editDepartment");
+  });
+
+  $("#departmentEditForm").on("submit", function (e) {
+    e.preventDefault();
+
+    const department = {
+      id: $("#editDepartmentId").val(),
+      name: $("#editDepartmentName").val(),
+    };
+
+    updateDepartment(department);
+    $("#editDepartmentModal").modal("hide");
+  });
+  //#endregion
+
+  //#region Delete Modal Config
+  $("#departmentTableBody").on("click", "#deleteDepartmentButton", function () {
+    fillModalById($(this).data("id"), "deleteDepartment");
+  });
+
+  $("#departmentDeleteForm").on("submit", function (e) {
+    e.preventDefault();
+
+    const department = {
+      id: $("#deleteDepartmentId").val(),
+    };
+
+    deleteDepartment(department);
+    $("#deleteDepartmentModal").modal("hide");
   });
   //#endregion
 });

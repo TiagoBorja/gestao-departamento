@@ -61,12 +61,12 @@
       </div>
     </div>
 
-    <!-- Employer Edit Modal -->
-    <div class="modal fade" id="editEmployerModal">
+    <!-- Department Edit Modal -->
+    <div class="modal fade" id="editDepartmentModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Employer Details</h5>
+            <h5 class="modal-title">Department Details</h5>
             <button
               type="button"
               class="btn-close"
@@ -74,51 +74,17 @@
               aria-label="Close"
             ></button>
           </div>
-          <form id="employerEditForm">
+          <form id="departmentEditForm">
             <div class="modal-body">
-              <input type="hidden" id="editEmployerId" />
+              <input type="hidden" id="editDepartmentId" />
 
               <div class="mb-3">
-                <label for="editEmployerName" class="form-label">Name</label>
-                <input type="text" class="form-control" id="editEmployerName" />
-              </div>
-
-              <div class="mb-3">
-                <label for="editEmployerMail" class="form-label">E-mail</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="editEmployerMail"
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="editEmployerHousehold" class="form-label"
-                  >Household</label
-                >
+                <label for="editDepartmentName" class="form-label">Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="editEmployerHousehold"
+                  id="editDepartmentName"
                 />
-              </div>
-
-              <div class="mb-3">
-                <label for="editEmployerBirth" class="form-label"
-                  >Date of Birth</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="editEmployerBirth"
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="editDepartmentId" class="form-label"
-                  >Department</label
-                >
-                <select id="editDepartmentId" class="form-control"></select>
               </div>
             </div>
             <div class="modal-footer">
@@ -175,12 +141,12 @@
       </div>
     </div>
 
-    <!-- Employer Delete Modal -->
-    <div class="modal fade" id="deleteEmployerModal">
+    <!-- Department Delete Modal -->
+    <div class="modal fade" id="deleteDepartmentModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Employer Details</h5>
+            <h5 class="modal-title">Department Details</h5>
             <button
               type="button"
               class="btn-close"
@@ -188,64 +154,18 @@
               aria-label="Close"
             ></button>
           </div>
-          <form id="employerDeleteForm">
+          <form id="departmentDeleteForm">
             <div class="modal-body">
-              <input type="hidden" id="deleteEmployerId" />
+              <input type="hidden" id="deleteDepartmentId" />
 
               <div class="mb-3">
-                <label for="deleteEmployerName" class="form-label">Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="deleteEmployerName"
-                  readonly
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="deleteEmployerMail" class="form-label"
-                  >E-mail</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="deleteEmployerMail"
-                  readonly
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="deleteEmployerHousehold" class="form-label"
-                  >Household</label
+                <label for="deleteDepartmentName" class="form-label"
+                  >Name</label
                 >
                 <input
                   type="text"
                   class="form-control"
-                  id="deleteEmployerHousehold"
-                  readonly
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="deleteEmployerBirth" class="form-label"
-                  >Date of Birth</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="deleteEmployerBirth"
-                  readonly
-                />
-              </div>
-
-              <div class="mb-3">
-                <label for="deleteEmployerDepartment" class="form-label"
-                  >Department</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="deleteEmployerDepartment"
+                  id="deleteDepartmentName"
                   readonly
                 />
               </div>
