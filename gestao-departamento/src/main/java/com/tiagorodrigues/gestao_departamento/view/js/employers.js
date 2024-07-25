@@ -29,12 +29,12 @@ $("#employerEditForm").on("submit", function (e) {
 
 //Modal Config - viewEmployerModal
 $("#employerTableBody").on("click", "#viewEmployerButton", function () {
-  fillModalById($(this).data("id"));
+  fillModalById($(this).data("id"), "viewEmployer");
 });
 
 //Modal Config - editEmployerModal
 $("#employerTableBody").on("click", "#editEmployerButton", function () {
-  fillEditModalById($(this).data("id"));
+  fillModalById($(this).data("id"), "editEmployer");
 });
 
 $("#employerEditForm").on("submit", function (e) {
@@ -160,19 +160,21 @@ function fillSelectDepartment() {
   });
 }
 
-function fillModalById(id) {
+function fillModalById(id, modalPrefix) {
   $.ajax({
     type: "GET",
     url: `${API_URL}/employers/${id}`,
     success: function (employer) {
-      $("#viewEmployerId").val(employer.id);
-      $("#viewEmployerName").val(employer.name);
-      $("#viewEmployerMail").val(employer.mail);
-      $("#viewEmployerHousehold").val(employer.household);
-      $("#viewEmployerBirth").val(employer.date_of_birth);
-      $("#viewEmployerDepartment").val(employer.id_department["name"]);
+      // Preencher os campos do modal com base no prefixo
+      $(`#${modalPrefix}Id`).val(employer.id);
+      $(`#${modalPrefix}Name`).val(employer.name);
+      $(`#${modalPrefix}Mail`).val(employer.mail);
+      $(`#${modalPrefix}Household`).val(employer.household);
+      $(`#${modalPrefix}Birth`).val(employer.date_of_birth);
+      $(`#${modalPrefix}Department`).val(employer.id_department["name"]);
 
-      $("#viewEmployermodal").modal("show");
+      // Exibir o modal
+      $(`#${modalPrefix}Modal`).modal("show");
     },
     error: function (xhr, status, error) {
       console.error("HTTP-Error: " + xhr.status, error);
@@ -180,25 +182,6 @@ function fillModalById(id) {
   });
 }
 
-function fillEditModalById(id) {
-  $.ajax({
-    type: "GET",
-    url: `${API_URL}/employers/${id}`,
-    success: function (employer) {
-      $("#editEmployerId").val(employer.id);
-      $("#editEmployerName").val(employer.name);
-      $("#editEmployerMail").val(employer.mail);
-      $("#editEmployerHousehold").val(employer.household);
-      $("#editEmployerBirth").val(employer.date_of_birth);
-      $("#editEmployerDepartment").val(employer.id_department["name"]);
-
-      $("#editEmployerModal").modal("show");
-    },
-    error: function (xhr, status, error) {
-      console.error("HTTP-Error: " + xhr.status, error);
-    },
-  });
-}
 //#endregion
 
 //#region Document Ready
