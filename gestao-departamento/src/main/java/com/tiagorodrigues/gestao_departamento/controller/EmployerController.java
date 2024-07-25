@@ -36,7 +36,7 @@ public class EmployerController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<List<Employer>> deleteEmployer(Long id, Employer employer){
+    public ResponseEntity<List<Employer>> deleteEmployer(@PathVariable Long id, Employer employer){
         return ResponseEntity.ok(employerService.deleteEmployer(id,employer));
     }
 }
