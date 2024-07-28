@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     @JsonProperty("user_type")
-    @Column(name = "user_type", length = 1, nullable = false)
+    @Column(name = "user_type", length = 15, nullable = false)
     private String userType;
 
     public Long getId() {
